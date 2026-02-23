@@ -33,18 +33,27 @@ COLOR_NAMES = {
     'g': 'Green',
 }
 
+FACES = {
+    "FRONT":[22,21,20,23],
+    "DOWN":[0,1,2,3],
+    "LEFT":[4,5,6,7],
+    "UP":[15,14,13,12],
+    "RIGHT":[17,16,19,18],
+    "BACK":[9,10,11,8]
+}
+
 def _colored(char):
     color = ANSI.get(char, '')
     return f"{BOLD}{color}▓▓{RESET}"
 
-def _face(state, start):
+def _face(state, face):
     """Retorna os 4 stickers de uma face como grid 2x2.
-    Índices: 0=baixo-esq, 1=cima-esq, 2=cima-dir, 3=baixo-dir
     """
-    s = state[start:start+4]
+    f=FACES[face]
+    s=state
     # linha de cima: [1, 2], linha de baixo: [0, 3]
-    top = [s[1], s[2]]
-    bot = [s[0], s[3]]
+    top = [s[f[1]], s[f[2]]]
+    bot = [s[f[0]], s[f[3]]]
     return top, bot
 
 def print_cube(state, label=None):
@@ -53,13 +62,12 @@ def print_cube(state, label=None):
         print(f"\n{BOLD}{label}{RESET}")
 
     # Extrair faces
-    # DOWN=0, LEFT=4, BACK=8, UP=12, RIGHT=16, FRONT=20
-    up_t,  up_b  = _face(state, 12)
-    lf_t,  lf_b  = _face(state, 4)
-    fr_t,  fr_b  = _face(state, 20)
-    rt_t,  rt_b  = _face(state, 16)
-    bk_t,  bk_b  = _face(state, 8)
-    dn_t,  dn_b  = _face(state, 0)
+    up_t,  up_b  = _face(state, "UP")
+    lf_t,  lf_b  = _face(state, "LEFT")
+    fr_t,  fr_b  = _face(state, "FRONT")
+    rt_t,  rt_b  = _face(state, "RIGHT")
+    bk_t,  bk_b  = _face(state, "BACK")
+    dn_t,  dn_b  = _face(state, "DOWN")
 
     gap = "      "  # 6 spaces to align with face width (each sticker = 2 chars)
 
