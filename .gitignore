@@ -1,0 +1,20 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# aima-python dependency (clone separately)
+aima-python/
+
+# Virtual environment
+env/
+.env/
+venv/
+
+# Pytest
+.pytest_cache/
+.coverage
+
+# IDEs
+.vscode/
+.idea/
