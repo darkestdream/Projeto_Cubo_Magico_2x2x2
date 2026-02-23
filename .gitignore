@@ -7,7 +7,6 @@ __pycache__/
 aima-python/
 
 # Virtual environment
-env/
 .env/
 venv/
 
