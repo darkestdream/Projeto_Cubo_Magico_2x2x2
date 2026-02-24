@@ -1,6 +1,12 @@
-# Cubo Mágico 2x2 — Grupo 1
+# Cubo Mágico 2x2 — Grupo 3
 
 Solucionador do cubo mágico 2×2 usando busca A* com canonicalização por rotação, implementado sobre a biblioteca [aima-python](https://github.com/aimacode/aima-python).
+
+---
+
+## Integrantes:
+
+
 
 ---
 
@@ -27,6 +33,56 @@ Solucionador do cubo mágico 2×2 usando busca A* com canonicalização por rota
 ```
 
 ---
+
+##  Especificação Formal do Problema
+
+A modelagem do problema segue o modelo clássico de busca da biblioteca AIMA:
+
+### ● Representação dos Estados
+
+* **Definição:** O estado é representado por uma **tupla de 24 stickers** (strings), onde cada posição do vetor corresponde a uma face e posição específica do cubo.
+* **Mapeamento no Código:** Definido no arquivo `env/cube_env.py`. O dicionário `INDICES` mapeia as faces (DOWN, LEFT, BACK, UP, RIGHT, FRONT) para os índices de 0 a 23.
+
+### ● Estado Inicial
+
+* **Definição:** Um cubo em qualquer configuração configurada, podendo ser o estado resolvido ou um estado gerado por uma sequência de movimentos aleatórios.
+* **Mapeamento no Código:** Implementado em `main.py` através da função `shuffle(ESTADO_INICIAL, n=30)`, que aplica 30 movimentos aleatórios para garantir complexidade de busca.
+
+### ● Conjunto de Ações
+
+* **Definição:** O conjunto de 12 rotações possíveis (6 faces × 2 direções: Horário e Anti-Horário).
+* **Mapeamento no Código:** Definido em `problems/cubo_problem.py` dentro do método `actions(self, state)`, que retorna a lista de movimentos `TURNS`.
+
+### ● Modelo de Transição (`result(s, a)`)
+
+* **Definição:** Uma função que recebe um estado e uma ação e retorna o novo estado resultante da aplicação física da rotação.
+* **Mapeamento no Código:** Implementado no método `result(self, state, action)` em `problems/cubo_problem.py`, que por sua vez utiliza a função `apply_move(state, face, direction)` de `env/cube_env.py` para permutar os stickers.
+
+### ● Teste de Objetivo (`goal_test`)
+
+* **Definição:** Verifica se o estado atual é o estado resolvido (todas as 6 faces com cores uniformes).
+* **Mapeamento no Código:** Implementado em `problems/cubo_problem.py` no método `goal_test(self, state)`, que compara o estado atual com o `ESTADO_INICIAL` de referência.
+
+### ● Custo de Caminho (`path_cost`)
+
+* **Definição:** O custo de cada movimento é unitário ($g(n) = 1$).
+* **Mapeamento no Código:** Gerenciado pelo método `path_cost` herdado da classe `Problem` (AIMA), onde o custo total é a soma dos movimentos realizados até o nó atual.
+
+
+---
+
+##  Classificação do Ambiente
+
+Segundo os critérios do AIMA, o ambiente do Cubo Mágico 2x2 é classificado como:
+
+* **Totalmente Observável**: O agente tem acesso completo ao estado do cubo (os 24 stickers) a cada momento, sem incerteza sobre a posição das cores.
+* **Determinístico**: O resultado de qualquer ação (movimento de face) é perfeitamente previsível. Não há elementos de sorte ou incerteza na transição de estados.
+* **Estático**: O ambiente não se altera enquanto o agente está deliberando/calculando a solução. O cubo permanece parado até que o agente decida agir.
+* **Discreto**: Existe um número finito e bem definido de estados e ações possíveis. Os movimentos são realizados em passos claros (90°).
+* **Agente Único**: Apenas o algoritmo de busca atua sobre o cubo para resolvê-lo; não há adversários ou outros agentes alterando o estado simultaneamente.
+
+---
+
 
 ## Instalação
 
