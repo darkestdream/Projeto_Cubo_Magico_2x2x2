@@ -8,7 +8,10 @@ O diferencial da implementação reside na integração de uma função heuríst
 
 ## Integrantes:
 
-
+* Augusto Henrique da Silva Santana
+* Cézar Augusto Nascimento Dias
+* Gabriela Safira Neves de Oliveira
+* Thiago Menezes Vasconcelos
 
 ---
 
@@ -20,8 +23,9 @@ O diferencial da implementação reside na integração de uma função heuríst
 ├── env/
 │   ├── __init__.py
 │   ├── cube_env.py       ← estado, movimentos, permutações
-│   └── canonicalize.py   ← canonicalização por rotação do cubo
-├── agents/
+|   ├── canonicalize.py   ← canonicalização por rotação do cubo
+│   └── display.py        ← criar uma representação visual bidimensional das seis faces do cubo
+├── solver/
 │   ├── __init__.py
 │   └── cubo_agent.py     ← NodeCubo, heurística h, A*, BFS
 ├── problems/
