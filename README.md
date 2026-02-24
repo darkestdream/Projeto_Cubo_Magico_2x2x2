@@ -184,7 +184,7 @@ Definimos duas funções no arquivo `agents/cubo_agent.py`:
 
 
 2. **Heurística Alternativa (`h2`)**:
-* **Definição**: $$h2(n) = (\sum_{face} (\text{cores\_extras})) / 4$$
+* **Definição**: $$h2(n) = \frac{\sum_{face} (\text{cores\_extras})}{4}$$
 * **Justificativa**: Versão utilizando divisão real (sem o arredondamento para cima), utilizada para analisar o impacto de uma heurística levemente menos "informada" no desempenho do agente.
 
 
