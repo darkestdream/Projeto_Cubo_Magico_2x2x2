@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'aima-python'))
 from env.cube_env import ESTADO_INICIAL, shuffle, apply_move
 from env.display import print_cube
 from problems.cubo_problem import ProblemaCubo
-from solver.cubo_agent import astar_search2, h
+from solver.cubo_agent import *
 
 DIRECTION_LABEL = {"CW": "↻ horário", "CCW": "↺ anti-horário"}
 
@@ -59,12 +59,20 @@ def main():
                 "UP", "CW"),
             "BACK", "CCW"),
         "FRONT", "CW")
+    estado_embaralhado=shuffle(ESTADO_INICIAL,n=13)
 
     print("\nBuscando solução com A*...")
     problem = ProblemaCubo(estado_embaralhado)
     solution = astar_search2(problem, h=h, display=True)
 
     print_solution_steps(solution)
+    print("\nBuscando solução com breadth-first..")
+    problem = ProblemaCubo(estado_embaralhado)
+    solution = breadth_first_graph_search2(problem, display=True)
+
+    print_solution_steps(solution)
+    
+    
 
 
 if __name__ == "__main__":

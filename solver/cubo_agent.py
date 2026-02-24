@@ -132,13 +132,15 @@ def astar_search2(problem, h=None, display=False):
     return best_first_graph_search3(problem, h, display)
 
 
-def breadth_first_graph_search2(problem):
+def breadth_first_graph_search2(problem,display=False):
     """BFS usando NodeCubo (com forma canônica para evitar duplicatas)."""
     node = NodeCubo(problem.initial)
-    if problem.goal_test(node.state):
-        return node
     frontier = deque([node])
     explored = set()
+    if problem.goal_test(node.state):
+        if display:
+            print(len(explored), "paths expanded,", len(frontier), "paths remain")
+        return node
     while frontier:
         node = frontier.popleft()
         explored.add(node.getCanonicalState())
@@ -146,6 +148,8 @@ def breadth_first_graph_search2(problem):
             child_canonical = child.getCanonicalState()
             if child_canonical not in explored:
                 if problem.goal_test(child.state):
+                    if display:
+                        print(len(explored), "paths expanded,", len(frontier), "paths remain")
                     return child
                 frontier.append(child)
                 explored.add(child_canonical)
