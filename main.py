@@ -43,7 +43,7 @@ def print_solution_steps(solution):
 def main():
     print("=" * 40)
     print("  Solucionador de Cubo Mágico 2x2")
-    print("         Grupo 1")
+    print("         Grupo 3")
     print("=" * 40)
 
     print_cube(tuple(ESTADO_INICIAL), label="Cubo resolvido (referência):")
