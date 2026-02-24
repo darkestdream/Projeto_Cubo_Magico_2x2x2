@@ -220,6 +220,6 @@ Conforme a especificação do projeto, o grupo não reescreveu o repositório do
 
 * **Busca em Profundidade (DFS)**: Inadequada porque o espaço de estados do cubo mágico é vasto e possui muitos ciclos. A DFS poderia mergulhar em caminhos infinitos ou encontrar soluções extremamente longas e ineficientes, não garantindo o caminho mínimo.
 * **Busca de Custo Uniforme (UCS)**: Como no cubo mágico todas as ações têm custo unitário ($g(n)=1$), a UCS se comportaria exatamente como uma Busca em Largura (BFS), porém com o custo adicional de manter uma fila de prioridade sem o auxílio de uma heurística para guiar a busca.
-* **Busca Gananciosa**: Embora rápida, ela ignora o custo do caminho já percorrido ($g(n)$), focando apenas na estimativa futura ($h(n)$). Isso faria com que o agente encontrasse soluções rapidamente, mas que não seriam as melhores (mínimo de movimentos), o que é um requisito importante para o Cubo Mágico.
+* **Busca Gananciosa**: Embora rápida, ela ignora o custo do caminho já percorrido $g(n)$, focando apenas na estimativa futura $h(n)$. Isso faria com que o agente encontrasse soluções rapidamente, mas que não seriam as melhores (mínimo de movimentos), o que é um requisito importante para o Cubo Mágico.
 
 ---
