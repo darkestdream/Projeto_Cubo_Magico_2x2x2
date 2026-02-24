@@ -56,7 +56,18 @@ def h(node):
         m = INDICES[side][0]
         total += len(set(node.state[m:m + 4])) - 1
     return (total + 3) // 4
-
+    
+def h2(node):
+    """
+    Heurística admissível: conta faces com cores mistas.
+    Cada face incorreta precisa de pelo menos 1 movimento para ser corrigida,
+    mas 1 movimento afeta até 4 faces → divide por 4.
+    """
+    total = 0
+    for side in SIDES:
+        m = INDICES[side][0]
+        total += len(set(node.state[m:m + 4])) - 1
+    return total / 4
 
 # ── Algoritmos de busca ─────────────────────────────────────────────────────────
 def best_first_graph_search3(problem, h_func, display=False):

@@ -59,12 +59,27 @@ def main():
                 "UP", "CW"),
             "BACK", "CCW"),
         "FRONT", "CW")
-    estado_embaralhado=shuffle(ESTADO_INICIAL,n=13)
+    estado_embaralhado=shuffle(ESTADO_INICIAL,n=30)
 
+    print("\nBuscando solução com A* com peso ...")
+    problem = ProblemaCubo(estado_embaralhado)
+    solution = astar_search2(problem, h=lambda n: h(n)*3, display=True)
+    print_solution_steps(solution)
+    
+    print("\nBuscando solução com A* com peso ...h2")
+    problem = ProblemaCubo(estado_embaralhado)
+    solution = astar_search2(problem, h=lambda n: h2(n)*3, display=True)
+    print_solution_steps(solution)
+    
     print("\nBuscando solução com A*...")
     problem = ProblemaCubo(estado_embaralhado)
     solution = astar_search2(problem, h=h, display=True)
-
+    print_solution_steps(solution)
+    
+    print("\nBuscando solução com A*...h2")
+    problem = ProblemaCubo(estado_embaralhado)
+    solution = astar_search2(problem, h=h2, display=True)
+    
     print_solution_steps(solution)
     print("\nBuscando solução com breadth-first..")
     problem = ProblemaCubo(estado_embaralhado)
