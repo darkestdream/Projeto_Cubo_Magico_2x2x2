@@ -204,3 +204,22 @@ Conforme a especificação do projeto, o grupo não reescreveu o repositório do
 | `astar_search` | `astar_search2` | Especialização que utiliza o motor de busca informada adaptado com cache de valores heurísticos para otimizar a performance. |
 
 ---
+
+### ● Algoritmos Utilizados
+
+* **A*** (`astar_search2`): Escolhido por ser um algoritmo de busca informada que garante a solução ótima (caminho mais curto) desde que a heurística seja admissível.
+* **Busca em Largura** (`breadth_first_graph_search2`): Utilizada como base de comparação para validar a eficiência da busca informada sobre a busca cega.
+
+### ● Algoritmos Não Utilizados (Exemplos do AIMA)
+
+* **Busca em Profundidade (DFS)**.
+* **Busca de Custo Uniforme (UCS)**.
+* **Busca Gananciosa (Greedy Best-First Search)**.
+
+### ● Justificativa de Inadequação
+
+* **Busca em Profundidade (DFS)**: Inadequada porque o espaço de estados do cubo mágico é vasto e possui muitos ciclos. A DFS poderia mergulhar em caminhos infinitos ou encontrar soluções extremamente longas e ineficientes, não garantindo o caminho mínimo.
+* **Busca de Custo Uniforme (UCS)**: Como no cubo mágico todas as ações têm custo unitário ($g(n)=1$), a UCS se comportaria exatamente como uma Busca em Largura (BFS), porém com o custo adicional de manter uma fila de prioridade sem o auxílio de uma heurística para guiar a busca.
+* **Busca Gananciosa**: Embora rápida, ela ignora o custo do caminho já percorrido ($g(n)$), focando apenas na estimativa futura ($h(n)$). Isso faria com que o agente encontrasse soluções rapidamente, mas que não seriam as melhores (mínimo de movimentos), o que é um requisito importante para o Cubo Mágico.
+
+---
