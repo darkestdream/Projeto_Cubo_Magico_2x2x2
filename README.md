@@ -15,7 +15,7 @@ O diferencial da implementação reside na integração de uma função heuríst
 
 ---
 
-* **Vídeo da Apresentação:** [Clique aqui para assistir](https://youtu.be/ItkYFc2Ynks)
+* **Vídeo da Apresentação:** [Clique aqui para assistir](https://youtu.be/95ApSHbQmUA)
 
 ---
 
