@@ -15,6 +15,12 @@ O diferencial da implementação reside na integração de uma função heuríst
 
 ---
 
+---
+
+* **Vídeo da Apresentação:** [Clique aqui para assistir]([https://youtu.be/4oBKUnbY8Pw)
+](https://youtu.be/ItkYFc2Ynks)
+---
+
 ## Estrutura do Projeto
 
 ```
