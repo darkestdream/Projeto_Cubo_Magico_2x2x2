@@ -1,6 +1,8 @@
 # Cubo Mágico 2x2 — Grupo 3
 
-Solucionador do cubo mágico 2×2 usando busca A* com canonicalização por rotação, implementado sobre a biblioteca [aima-python](https://github.com/aimacode/aima-python).
+Este projeto apresenta um agente inteligente capaz de resolver o Cubo Mágico 2x2 através de algoritmos de busca informada. A solução foi desenvolvida utilizando a biblioteca [aima-python](https://github.com/aimacode/aima-python).
+
+O diferencial da implementação reside na integração de uma função heurística admissível com a técnica de canonicalização por rotação. Esta abordagem permite que o agente trate estados simétricos (equivalentes por rotação no espaço) como um único nó no grafo de busca, reduzindo drasticamente a explosão combinatória e otimizando o desempenho do algoritmo A*.
 
 ---
 
