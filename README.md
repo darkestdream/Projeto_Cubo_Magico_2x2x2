@@ -177,7 +177,7 @@ O projeto utiliza a base sólida da biblioteca `aima-python`, aplicando o concei
 Definimos duas funções no arquivo `agents/cubo_agent.py`:
 
 1. **Heurística Principal (`h`)**:
-* **Definição**: $$h(n) = \lceil (\sum_{face} (\text{cores\_extras})) / 4 \rceil$$
+* **Definição**: $$h(n) = \text{ceil} \left( \frac{\sum_{face} (\text{cores\_extras})}{4} \right)$$
 * **Intuição**: Como cada movimento de face altera exatamente 4 stickers simultaneamente, contamos quantos stickers estão fora da cor predominante de sua face e dividimos pelo potencial máximo de correção de um único movimento.
 * **Admissibilidade**: É **admissível**, pois nunca superestima o custo real; o cubo não pode ser resolvido com menos movimentos do que o necessário para organizar esses stickers individualmente.
 * **Impacto**: Reduz drasticamente o número de nós expandidos em relação à busca cega (BFS).
