@@ -147,14 +147,6 @@ Dentro de cada face, vista de frente: índice 0 = baixo-esq, 1 = cima-esq, 2 = c
 
 ---
 
-## Algoritmo
-
-- **A\*** com `f(n) = g(n) + h(n)`
-- **Heurística `h`**: conta faces com cores mistas, dividido por 4 (admissível)
-- **Canonicalização**: estados equivalentes por rotação do cubo são tratados como idênticos, reduzindo o espaço de busca em até 24×
-
----
-
 ## Movimentos
 
 12 movimentos: 6 faces × 2 direções (CW = horário, CCW = anti-horário)
@@ -167,3 +159,46 @@ Dentro de cada face, vista de frente: índice 0 = baixo-esq, 1 = cima-esq, 2 = c
 ('RIGHT','CW'), ('RIGHT','CCW'),
 ('FRONT','CW'), ('FRONT','CCW')
 ```
+
+---
+
+## Heurísticas e Algoritmos Implementados
+
+O projeto utiliza a base sólida da biblioteca `aima-python`, aplicando o conceito de **herança e especialização** para resolver as particularidades do Cubo Mágico 2x2.
+
+### ● Visão Geral do Algoritmo
+
+* **A*** com $f(n) = g(n) + h(n)$.
+* **Heurística $h$**: Baseada na contagem de faces com cores mistas, dividida por 4 para manter a admissibilidade.
+* **Canonicalização**: Estados equivalentes por rotação do cubo são tratados como idênticos, reduzindo o espaço de busca em até 24×.
+
+### ● Detalhamento das Heurísticas
+
+Definimos duas funções no arquivo `agents/cubo_agent.py`:
+
+1. **Heurística Principal (`h`)**:
+* **Definição**: $h(n) = \lceil (\sum_{face} (\text{cores\_extras})) / 4 \rceil$.
+* **Intuição**: Como cada movimento de face altera exatamente 4 stickers simultaneamente, contamos quantos stickers estão fora da cor predominante de sua face e dividimos pelo potencial máximo de correção de um único movimento.
+* **Admissibilidade**: É **admissível**, pois nunca superestima o custo real; o cubo não pode ser resolvido com menos movimentos do que o necessário para organizar esses stickers individualmente.
+* **Impacto**: Reduz drasticamente o número de nós expandidos em relação à busca cega (BFS).
+
+
+2. **Heurística Alternativa (`h2`)**:
+* **Definição**: $h2(n) = (\sum_{face} (\text{cores\_extras})) / 4$.
+* **Justificativa**: Versão utilizando divisão real (sem o arredondamento para cima), utilizada para analisar o impacto de uma heurística levemente menos "informada" no desempenho do agente.
+
+
+
+### ● Adaptação das Estruturas AIMA (Justificativa)
+
+Conforme a especificação do projeto, o grupo não reescreveu o repositório do zero, mas estendeu as classes base para suportar a **Canonicalização**:
+
+| Estrutura Base AIMA | Subclasse / Adaptação | Justificativa Técnica |
+| --- | --- | --- |
+| `Problem` | `ProblemaCubo` | Implementação obrigatória da modelagem do domínio (ações, resultado e teste de objetivo). |
+| `Node` | `NodeCubo` | Adição da propriedade `getCanonicalState`. No cubo, um estado possui 24 orientações físicas idênticas. Esta subclasse permite identificar estados equivalentes e evitar ciclos redundantes. |
+| `best_first_graph_search` | `best_first_graph_search3` | Adaptação para que a verificação de estados repetidos (`explored set`) utilize a forma **canônica** do nó em vez do estado bruto, otimizando a busca em 24 vezes. |
+| `breadth_first_graph_search` | `breadth_first_graph_search2` | Especialização da busca em largura que integra a detecção de duplicatas via canonicalização para evitar a explosão combinatória. |
+| `astar_search` | `astar_search2` | Especialização que utiliza o motor de busca informada adaptado com cache de valores heurísticos para otimizar a performance. |
+
+---
